@@ -38,6 +38,9 @@ const music = document.getElementById("backgroundMusic");
 const musicToggle = document.getElementById("musicToggle");
 const topbar = document.querySelector(".topbar");
 const heroSection = document.getElementById("start");
+const introScreen = document.getElementById("introScreen");
+const introVideo = document.getElementById("introVideo");
+let introCompleted = !introScreen || !introVideo;
 
 const sections = [...document.querySelectorAll(".section-observe")];
 const navLinks = [...document.querySelectorAll(".nav-link")];
@@ -61,7 +64,43 @@ async function attemptAutoPlay() {
   }
 }
 
-attemptAutoPlay();
+function finishIntro() {
+  if (introCompleted) return;
+  introCompleted = true;
+  document.body.classList.remove("intro-active");
+  introScreen.classList.add("is-hidden");
+  if (music && music.paused) attemptAutoPlay();
+}
+
+if (!introCompleted) {
+  document.body.classList.add("intro-active");
+  introVideo.addEventListener(
+    "ended",
+    () => {
+      finishIntro();
+    },
+    { once: true }
+  );
+  introVideo.addEventListener(
+    "error",
+    () => {
+      finishIntro();
+    },
+    { once: true }
+  );
+  introVideo.muted = true;
+  introVideo.setAttribute("muted", "");
+
+  const startIntroVideo = () => {
+    if (!introVideo.paused) return;
+    introVideo.play().catch(() => {});
+  };
+
+  introScreen.addEventListener("click", startIntroVideo);
+  introScreen.addEventListener("touchstart", startIntroVideo, { passive: true });
+} else {
+  attemptAutoPlay();
+}
 
 if (music) {
   ["pointerdown", "touchstart", "scroll"].forEach((eventName) => {
