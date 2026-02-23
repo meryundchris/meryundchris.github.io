@@ -198,6 +198,10 @@ if (saved && form) {
       const radio = form.querySelector(`input[name="attendance"][value="${data.attendance}"]`);
       if (radio) radio.checked = true;
     }
+    if (data.menuChoice) {
+      const menuRadio = form.querySelector(`input[name="menuChoice"][value="${data.menuChoice}"]`);
+      if (menuRadio) menuRadio.checked = true;
+    }
     if (data.message) form.message.value = data.message;
   } catch {
     localStorage.removeItem(storageKey);
@@ -212,9 +216,10 @@ if (form) {
     const guestName = String(formData.get("guestName") || "").trim();
     const guestCount = String(formData.get("guestCount") || "").trim();
     const attendance = String(formData.get("attendance") || "").trim();
+    const menuChoice = String(formData.get("menuChoice") || "").trim();
     const message = String(formData.get("message") || "").trim();
 
-    const payload = { guestName, guestCount, attendance, message };
+    const payload = { guestName, guestCount, attendance, menuChoice, message };
     localStorage.setItem(storageKey, JSON.stringify(payload));
 
     const subject = encodeURIComponent("Rückmeldung Hochzeit Meryem & Christopher");
@@ -223,6 +228,7 @@ if (form) {
         `Name: ${guestName}`,
         `Anzahl Personen: ${guestCount}`,
         `Antwort: ${attendance}`,
+        `Menüauswahl: ${menuChoice || "-"}`,
         `Nachricht: ${message || "-"}`,
       ].join("\n")
     );

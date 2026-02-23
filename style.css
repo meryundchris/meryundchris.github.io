@@ -276,6 +276,13 @@ h2 {
   letter-spacing: 0.02em;
 }
 
+h3 {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #4d3918;
+}
+
 h1 {
   font-size: clamp(2rem, 8vw, 3.2rem);
   color: #413215;
@@ -425,6 +432,50 @@ fieldset {
   color: #4f3e21;
 }
 
+.team-grid,
+.contact-grid {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 0.9rem;
+}
+
+.team-card,
+.contact-card {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(184, 138, 60, 0.2);
+  border-radius: 0.85rem;
+  padding: 0.75rem;
+}
+
+.team-card {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 0.3rem;
+}
+
+.team-card img {
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 1 / 1;
+  border-radius: 0.8rem;
+  border: 1px solid rgba(184, 138, 60, 0.2);
+  object-fit: cover;
+  background: #fff;
+}
+
+.team-card a,
+.contact-card a {
+  color: #6d4c23;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.contact-card {
+  display: grid;
+  gap: 0.35rem;
+}
+
 .footer {
   text-align: center;
   color: #6d5733;
@@ -453,5 +504,13 @@ fieldset {
     width: min(540px, 100%);
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
