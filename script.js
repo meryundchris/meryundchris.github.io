@@ -42,8 +42,10 @@ const introScreen = document.getElementById("introScreen");
 const introVideo = document.getElementById("introVideo");
 let introCompleted = !introScreen || !introVideo;
 
-const sections = [...document.querySelectorAll(".section-observe")];
 const navLinks = [...document.querySelectorAll(".nav-link")];
+const navSections = navLinks
+  .map((link) => document.getElementById(link.dataset.section))
+  .filter(Boolean);
 
 function syncMusicUi() {
   if (!musicToggle || !music) return;
@@ -169,20 +171,57 @@ if (topbar && heroSection) {
   heroObserver.observe(heroSection);
 }
 
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      const id = entry.target.id;
-      navLinks.forEach((link) => {
-        link.classList.toggle("active", link.dataset.section === id);
-      });
-    });
-  },
-  { threshold: 0.38 }
-);
+function setActiveNavLink(activeId) {
+  navLinks.forEach((link) => {
+    link.classList.toggle("active", link.dataset.section === activeId);
+  });
+}
 
-sections.forEach((section) => observer.observe(section));
+function getActivationOffset() {
+  const firstTrackedSection = navSections[0];
+  if (firstTrackedSection) {
+    const scrollMarginTop = Number.parseFloat(getComputedStyle(firstTrackedSection).scrollMarginTop);
+    if (Number.isFinite(scrollMarginTop) && scrollMarginTop > 0) return scrollMarginTop;
+  }
+
+  const topbarHeight = topbar ? topbar.getBoundingClientRect().height : 0;
+  return topbarHeight + 24;
+}
+
+function updateActiveNavByScrollPosition() {
+  if (!navSections.length) return;
+
+  const activationOffset = getActivationOffset();
+  let activeId = null;
+
+  navSections.forEach((section) => {
+    if (section.getBoundingClientRect().top <= activationOffset) {
+      activeId = section.id;
+    }
+  });
+
+  if (!activeId) {
+    setActiveNavLink(null);
+    return;
+  }
+
+  setActiveNavLink(activeId);
+}
+
+let activeNavRafId = null;
+function queueActiveNavUpdate() {
+  if (activeNavRafId !== null) return;
+  activeNavRafId = requestAnimationFrame(() => {
+    activeNavRafId = null;
+    updateActiveNavByScrollPosition();
+  });
+}
+
+window.addEventListener("scroll", queueActiveNavUpdate, { passive: true });
+window.addEventListener("resize", queueActiveNavUpdate);
+window.addEventListener("hashchange", queueActiveNavUpdate);
+
+updateActiveNavByScrollPosition();
 
 const form = document.getElementById("rsvp-form");
 const status = document.getElementById("form-status");
