@@ -174,7 +174,7 @@ body.intro-active {
 
 .nav {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.4rem;
   overflow-x: auto;
   padding: 0.35rem;
@@ -182,6 +182,12 @@ body.intro-active {
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(184, 138, 60, 0.24);
   backdrop-filter: blur(10px);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.nav::-webkit-scrollbar {
+  display: none;
 }
 
 .nav-link {
@@ -362,8 +368,20 @@ h2 {
 }
 
 .unit small {
+  display: block;
   font-size: 0.78rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
   color: #7a6542;
+}
+
+html[lang="el"] .nav-link {
+  font-size: 0.9rem;
+  padding: 0.35rem 0.52rem;
+}
+
+html[lang="el"] .unit small {
+  font-size: 0.73rem;
 }
 
 .map-wrap {
@@ -539,6 +557,10 @@ fieldset {
 }
 
 @media (min-width: 760px) {
+  .nav {
+    justify-content: center;
+  }
+
   .topbar {
     width: min(980px, calc(100% - 2.5rem));
   }
