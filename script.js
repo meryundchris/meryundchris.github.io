@@ -209,7 +209,7 @@ if (saved && form) {
 }
 
 if (form) {
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     const formData = new FormData(form);
@@ -221,19 +221,38 @@ if (form) {
 
     const payload = { guestName, guestCount, attendance, menuChoice, message };
     localStorage.setItem(storageKey, JSON.stringify(payload));
+    const submitButton = form.querySelector('button[type="submit"]');
+    const action = form.getAttribute("action");
 
-    const subject = encodeURIComponent("Rückmeldung Hochzeit Meryem & Christopher");
-    const body = encodeURIComponent(
-      [
-        `Name: ${guestName}`,
-        `Anzahl Personen: ${guestCount}`,
-        `Antwort: ${attendance}`,
-        `Menüauswahl: ${menuChoice || "-"}`,
-        `Nachricht: ${message || "-"}`,
-      ].join("\n")
-    );
+    if (!action) {
+      if (status) status.textContent = "Formularziel fehlt. Bitte später erneut versuchen.";
+      return;
+    }
 
-    window.location.href = `mailto:meryem-und-christopher@example.com?subject=${subject}&body=${body}`;
-    if (status) status.textContent = "Rückmeldung gespeichert. E-Mail-Entwurf wurde geöffnet.";
+    if (submitButton) submitButton.disabled = true;
+    if (status) status.textContent = "Rückmeldung wird gesendet...";
+
+    try {
+      const response = await fetch(action, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Formspree request failed");
+      }
+
+      if (status) status.textContent = "Danke! Deine Rückmeldung wurde erfolgreich gesendet.";
+      form.reset();
+      localStorage.removeItem(storageKey);
+    } catch {
+      if (status) {
+        status.textContent =
+          "Senden fehlgeschlagen. Bitte versuche es erneut oder kontaktiere uns direkt per Telefon.";
+      }
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
   });
 }

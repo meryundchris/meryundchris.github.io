@@ -157,7 +157,7 @@
         </p>
         <p class="hint">Auswahl: Fleisch (Kalb), Fisch (Zander) oder vegetarisch.</p>
 
-        <form id="rsvp-form" class="rsvp-form">
+        <form id="rsvp-form" class="rsvp-form" action="https://formspree.io/f/mvzbeeqv" method="POST">
           <label for="guestName">Name</label>
           <input id="guestName" name="guestName" type="text" required />
 
@@ -195,9 +195,9 @@
           <label for="message">Nachricht (optional)</label>
           <textarea id="message" name="message" rows="4"></textarea>
 
-          <button type="submit" class="button">Per E-Mail senden</button>
+          <button type="submit" class="button">Rückmeldung senden</button>
           <p class="small">
-            Die Rückmeldung wird lokal im Browser gespeichert und per E-Mail vorbereitet.
+            Die Rückmeldung wird lokal im Browser gespeichert und sicher über unser Formular gesendet.
           </p>
           <p id="form-status" class="status" aria-live="polite"></p>
         </form>
