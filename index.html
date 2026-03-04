@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div id="introScreen" class="intro-screen" aria-label="Introanimation zur Hochzeitseinladung">
+    <div id="introScreen" class="intro-screen" data-i18n-aria-label="intro_aria" aria-label="Introanimation zur Hochzeitseinladung">
       <video
         id="introVideo"
         class="intro-video"
@@ -44,77 +44,88 @@
         </svg>
       </span>
     </button>
+    <button id="languageToggle" class="language-toggle" type="button" aria-label="Sprache wechseln zu Griechisch">
+      <span id="languageFlag" class="language-flag" aria-hidden="true">🇩🇪</span>
+      <span id="languageCode" class="language-code" aria-hidden="true">DE</span>
+    </button>
 
     <header class="topbar">
-      <nav class="nav" aria-label="Bereiche">
-        <a href="#location" data-section="location" class="nav-link">Location</a>
-        <a href="#tagesablauf" data-section="tagesablauf" class="nav-link">Tagesablauf</a>
-        <a href="#dresscode" data-section="dresscode" class="nav-link">Dresscode</a>
-        <a href="#rueckmeldung" data-section="rueckmeldung" class="nav-link">Rückmeldung</a>
+      <nav class="nav" data-i18n-aria-label="nav_aria" aria-label="Bereiche">
+        <a href="#location" data-section="location" data-i18n="nav_location" class="nav-link">Location</a>
+        <a href="#tagesablauf" data-section="tagesablauf" data-i18n="nav_schedule" class="nav-link">Tagesablauf</a>
+        <a href="#dresscode" data-section="dresscode" data-i18n="nav_dresscode" class="nav-link">Dresscode</a>
+        <a href="#rueckmeldung" data-section="rueckmeldung" data-i18n="nav_rsvp" class="nav-link">Rückmeldung</a>
       </nav>
     </header>
 
     <main>
       <section id="start" class="startscreen">
-        <div class="startscreen-image" id="photoFrame" role="img" aria-label="Paarfoto von Meryem und Christopher">
-          <img id="couplePhoto" src="./images/main.jpeg" alt="Meryem und Christopher" />
-          <div class="photo-fallback">Bild hier platzieren: `merychris3/images/`</div>
+        <div
+          class="startscreen-image"
+          id="photoFrame"
+          role="img"
+          data-i18n-aria-label="photo_aria"
+          aria-label="Paarfoto von Meryem und Christopher"
+        >
+          <img id="couplePhoto" src="./images/main.jpeg" data-i18n-alt="photo_alt" alt="Meryem und Christopher" />
+          <div class="photo-fallback" data-i18n="photo_fallback">Bild hier platzieren: `merychris3/images/`</div>
           <div class="hero-overlay"></div>
           <div class="hero-text">
-            <p>Wir heiraten!</p>
+            <p data-i18n="hero_getting_married">Wir heiraten!</p>
             <h1>Meryem und Christopher</h1>
-            <p class="wedding-date">27. Juni 2026</p>
+            <p class="wedding-date" data-i18n="hero_date">27. Juni 2026</p>
           </div>
         </div>
       </section>
 
       <section id="einladung" class="section hero">
-        <p>
+        <p data-i18n="invitation_p1">
           Endlich ist es soweit, wir sagen Ja.
         </p>
-        <p>
+        <p data-i18n="invitation_p2">
           Wir möchten den bedeutsamsten Tag unseres Lebens mit den Menschen verbringen, die uns am wichtigsten sind.
           Deshalb laden wir euch von Herzen ein, unsere Hochzeit gemeinsam mit uns zu feiern.
         </p>
-        <p>
+        <p data-i18n="invitation_p3">
           Wir freuen uns auf einen Tag voller Emotionen, unvergesslicher Momente und vor allem auf die gemeinsame Zeit
           mit euch.
         </p>
-        <p>Lasst uns zusammen tanzen, lachen und einzigartige Erinnerungen schaffen.</p>
+        <p data-i18n="invitation_p4">Lasst uns zusammen tanzen, lachen und einzigartige Erinnerungen schaffen.</p>
         <div class="countdown" aria-live="polite">
           <div class="unit">
             <span id="days">0</span>
-            <small>Tage</small>
+            <small data-i18n="countdown_days">Tage</small>
           </div>
           <div class="unit">
             <span id="hours">0</span>
-            <small>Stunden</small>
+            <small data-i18n="countdown_hours">Stunden</small>
           </div>
           <div class="unit">
             <span id="minutes">0</span>
-            <small>Minuten</small>
+            <small data-i18n="countdown_minutes">Minuten</small>
           </div>
           <div class="unit">
             <span id="seconds">0</span>
-            <small>Sekunden</small>
+            <small data-i18n="countdown_seconds">Sekunden</small>
           </div>
         </div>
-        <p class="location-note">Schloss Dachau, München</p>
+        <p class="location-note" data-i18n="location_note">Schloss Dachau, München</p>
       </section>
 
       <section id="location" class="section section-observe">
-        <h2>Location</h2>
-        <p>
+        <h2 data-i18n="location_h2">Location</h2>
+        <p data-i18n="location_p1">
           Unsere Trauung und Feier finden im wunderschönen Schloss Dachau statt.
         </p>
-        <p>
+        <p data-i18n="location_p2">
           Um 14:00 Uhr werden wir uns im Vestibül des Schlosses das Ja-Wort geben. Wir bitten euch, bereits um
           13:30 Uhr vor Ort zu sein, damit wir ganz entspannt gemeinsam starten können.
         </p>
-        <p>Vor dem Schloss befindet sich ein öffentlicher Parkplatz, der genutzt werden kann.</p>
+        <p data-i18n="location_p3">Vor dem Schloss befindet sich ein öffentlicher Parkplatz, der genutzt werden kann.</p>
 
         <div class="map-wrap">
           <iframe
+            data-i18n-title="map_title"
             title="Google Maps - Schloss Dachau"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
@@ -127,76 +138,77 @@
           href="https://www.google.com/maps/search/?api=1&query=Schloss+Dachau"
           target="_blank"
           rel="noreferrer"
+          data-i18n="open_maps_button"
           >In Google Maps öffnen</a
         >
       </section>
 
       <section id="tagesablauf" class="section section-observe">
-        <h2>Tagesablauf</h2>
+        <h2 data-i18n="schedule_h2">Tagesablauf</h2>
         <ul class="timeline">
-          <li><span>13:30</span> Ankunft der Gäste</li>
-          <li><span>14:00</span> Trauung im Vestibül</li>
-          <li><span>14:30</span> Empfang mit Häppchen auf der Terrasse oder im Foyer</li>
-          <li><span>16:00</span> Kaffee und Kuchen</li>
-          <li><span>19:00</span> Hochzeitsdinner im Gartensaal</li>
-          <li><span>anschl.</span> Party mit DJ</li>
-          <li><span>02:00</span> Ende der Feier</li>
+          <li><span>13:30</span> <span data-i18n="timeline_1">Ankunft der Gäste</span></li>
+          <li><span>14:00</span> <span data-i18n="timeline_2">Trauung im Vestibül</span></li>
+          <li><span>14:30</span> <span data-i18n="timeline_3">Empfang mit Häppchen auf der Terrasse oder im Foyer</span></li>
+          <li><span>16:00</span> <span data-i18n="timeline_4">Kaffee und Kuchen</span></li>
+          <li><span>19:00</span> <span data-i18n="timeline_5">Hochzeitsdinner im Gartensaal</span></li>
+          <li><span data-i18n="timeline_time_after">anschl.</span> <span data-i18n="timeline_6">Party mit DJ</span></li>
+          <li><span>02:00</span> <span data-i18n="timeline_7">Ende der Feier</span></li>
         </ul>
-        <p class="hint">Ablaufänderungen teilen wir euch hier rechtzeitig mit.</p>
+        <p class="hint" data-i18n="schedule_hint">Ablaufänderungen teilen wir euch hier rechtzeitig mit.</p>
       </section>
 
       <section id="dresscode" class="section section-observe">
-        <h2>Dresscode</h2>
-        <p>Summer Formal ☀️</p>
+        <h2 data-i18n="dresscode_h2">Dresscode</h2>
+        <p data-i18n="dresscode_p1">Summer Formal ☀️</p>
       </section>
 
       <section id="rueckmeldung" class="section section-observe">
-        <h2>Rückmeldung</h2>
-        <p>
+        <h2 data-i18n="rsvp_h2">Rückmeldung</h2>
+        <p data-i18n="rsvp_p1">
           Bitte gebt uns hier Bescheid, ob ihr dabei sein könnt. Außerdem könnt ihr hier eure Menüauswahl treffen.
         </p>
-        <p class="hint">Auswahl: Fleisch (Kalb), Fisch (Zander) oder vegetarisch.</p>
+        <p class="hint" data-i18n="rsvp_hint">Auswahl: Fleisch (Kalb), Fisch (Zander) oder vegetarisch.</p>
 
         <form id="rsvp-form" class="rsvp-form" action="https://formspree.io/f/mvzbeeqv" method="POST">
-          <label for="guestName">Name</label>
+          <label for="guestName" data-i18n="form_name_label">Name</label>
           <input id="guestName" name="guestName" type="text" required />
 
-          <label for="guestCount">Anzahl Personen</label>
+          <label for="guestCount" data-i18n="form_count_label">Anzahl Personen</label>
           <input id="guestCount" name="guestCount" type="number" min="1" value="1" required />
 
           <fieldset>
-            <legend>Teilnahme</legend>
+            <legend data-i18n="form_attendance_legend">Teilnahme</legend>
             <label class="radio">
               <input type="radio" name="attendance" value="Wir kommen" required />
-              <span>Wir kommen</span>
+              <span data-i18n="form_attendance_yes">Wir kommen</span>
             </label>
             <label class="radio">
               <input type="radio" name="attendance" value="Wir kommen nicht" />
-              <span>Wir kommen nicht</span>
+              <span data-i18n="form_attendance_no">Wir kommen nicht</span>
             </label>
           </fieldset>
 
           <fieldset>
-            <legend>Menüauswahl</legend>
+            <legend data-i18n="form_menu_legend">Menüauswahl</legend>
             <label class="radio">
               <input type="radio" name="menuChoice" value="Fleisch (Kalb)" required />
-              <span>Fleisch (Kalb)</span>
+              <span data-i18n="form_menu_meat">Fleisch (Kalb)</span>
             </label>
             <label class="radio">
               <input type="radio" name="menuChoice" value="Fisch (Zander)" />
-              <span>Fisch (Zander)</span>
+              <span data-i18n="form_menu_fish">Fisch (Zander)</span>
             </label>
             <label class="radio">
               <input type="radio" name="menuChoice" value="Vegetarisch" />
-              <span>Vegetarisch</span>
+              <span data-i18n="form_menu_veg">Vegetarisch</span>
             </label>
           </fieldset>
 
-          <label for="message">Nachricht (optional)</label>
+          <label for="message" data-i18n="form_message_label">Nachricht (optional)</label>
           <textarea id="message" name="message" rows="4"></textarea>
 
-          <button type="submit" class="button">Rückmeldung senden</button>
-          <p class="small">
+          <button type="submit" class="button" data-i18n="form_submit_button">Rückmeldung senden</button>
+          <p class="small" data-i18n="form_small_note">
             Die Rückmeldung wird lokal im Browser gespeichert und sicher über unser Formular gesendet.
           </p>
           <p id="form-status" class="status" aria-live="polite"></p>
@@ -204,8 +216,8 @@
       </section>
 
       <section id="organisationsteam" class="section section-observe">
-        <h2>Organisationsteam</h2>
-        <p>
+        <h2 data-i18n="org_h2">Organisationsteam</h2>
+        <p data-i18n="org_p1">
           Damit unser Tag entspannt und reibungslos abläuft, haben wir großartige Unterstützung an unserer Seite.
           Wenn ihr Fragen habt oder eine Überraschung plant, könnt ihr euch gern an unsere Trauzeug:innen wenden.
         </p>
@@ -235,21 +247,22 @@
       </section>
 
       <section id="wuensche" class="section section-observe">
-        <h2>Wünsche</h2>
-        <p>Für uns ist das größte Geschenk, diesen Tag gemeinsam mit euch zu verbringen.</p>
-        <p>
+        <h2 data-i18n="wishes_h2">Wünsche</h2>
+        <p data-i18n="wishes_p1">Für uns ist das größte Geschenk, diesen Tag gemeinsam mit euch zu verbringen.</p>
+        <p data-i18n="wishes_p2">
           Wenn ihr uns darüber hinaus eine Freude machen möchtet, freuen wir uns über einen Beitrag zu unserem
           gemeinsamen Start ins Eheleben.
         </p>
       </section>
 
       <section id="kontakt" class="section section-observe">
-        <h2>Kontaktdaten</h2>
-        <p>Hier findet ihr unsere Kontaktdaten für alle weiteren Fragen rund um die Hochzeit.</p>
+        <h2 data-i18n="contact_h2">Kontaktdaten</h2>
+        <p data-i18n="contact_p1">Hier findet ihr unsere Kontaktdaten für alle weiteren Fragen rund um die Hochzeit.</p>
         <div class="contact-photo-frame">
           <img
             class="contact-photo"
             src="./images/tipps-hochzeitsfotos_02.jpg"
+            data-i18n-alt="contact_photo_alt"
             alt="Meryem und Christopher"
             loading="lazy"
           />
@@ -268,7 +281,7 @@
     </main>
 
     <footer class="footer">
-      <p>Wir freuen uns sehr auf diesen besonderen Tag mit euch.</p>
+      <p data-i18n="footer_p1">Wir freuen uns sehr auf diesen besonderen Tag mit euch.</p>
     </footer>
 
     <script src="./script.js"></script>
