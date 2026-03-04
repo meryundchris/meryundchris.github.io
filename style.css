@@ -476,6 +476,26 @@ fieldset {
   gap: 0.35rem;
 }
 
+.contact-photo-frame {
+  width: 100%;
+  aspect-ratio: 6 / 5;
+  margin-top: 0.9rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(184, 138, 60, 0.2);
+  overflow: hidden;
+  background: #fff;
+}
+
+.contact-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scale(1.48);
+  transform-origin: center;
+  object-fit: cover;
+  object-position: center;
+}
+
 .footer {
   text-align: center;
   color: #6d5733;
