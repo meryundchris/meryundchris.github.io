@@ -98,13 +98,12 @@ const translations = {
     dresscode_h2: "Dresscode",
     dresscode_p1: "Summer Formal ☀️",
     rsvp_h2: "Rückmeldung",
-    rsvp_p1: "Bitte gebt uns hier Bescheid, ob ihr dabei sein könnt. Außerdem könnt ihr hier eure Menüauswahl treffen.",
+    rsvp_p1: "Bitte gib uns hier Bescheid, ob du dabei sein kannst. Außerdem kannst du hier deine Menüauswahl treffen.",
     rsvp_hint: "Auswahl: Fleisch (Kalb), Fisch (Zander) oder vegetarisch.",
     form_name_label: "Name",
-    form_count_label: "Anzahl Personen",
     form_attendance_legend: "Teilnahme",
-    form_attendance_yes: "Wir kommen",
-    form_attendance_no: "Wir kommen nicht",
+    form_attendance_yes: "Ich komme",
+    form_attendance_no: "Ich komme leider nicht",
     form_menu_legend: "Menüauswahl",
     form_menu_meat: "Fleisch (Kalb)",
     form_menu_fish: "Fisch (Zander)",
@@ -182,10 +181,9 @@ const translations = {
       "Παρακαλούμε ενημερώστε μας εδώ αν μπορείτε να παρευρεθείτε. Επίσης μπορείτε να επιλέξετε το μενού σας.",
     rsvp_hint: "Επιλογή: Κρέας (μοσχάρι), ψάρι (ζάντερ) ή χορτοφαγικό.",
     form_name_label: "Όνομα",
-    form_count_label: "Αριθμός ατόμων",
     form_attendance_legend: "Συμμετοχή",
-    form_attendance_yes: "Θα έρθουμε",
-    form_attendance_no: "Δεν θα έρθουμε",
+    form_attendance_yes: "Θα έρθω",
+    form_attendance_no: "Δυστυχώς δεν θα έρθω",
     form_menu_legend: "Επιλογή μενού",
     form_menu_meat: "Κρέας (μοσχάρι)",
     form_menu_fish: "Ψάρι (ζάντερ)",
@@ -488,7 +486,6 @@ if (saved && form) {
   try {
     const data = JSON.parse(saved);
     if (data.guestName) form.guestName.value = data.guestName;
-    if (data.guestCount) form.guestCount.value = data.guestCount;
     if (data.attendance) {
       const radio = form.querySelector(`input[name="attendance"][value="${data.attendance}"]`);
       if (radio) radio.checked = true;
@@ -509,12 +506,11 @@ if (form) {
 
     const formData = new FormData(form);
     const guestName = String(formData.get("guestName") || "").trim();
-    const guestCount = String(formData.get("guestCount") || "").trim();
     const attendance = String(formData.get("attendance") || "").trim();
     const menuChoice = String(formData.get("menuChoice") || "").trim();
     const message = String(formData.get("message") || "").trim();
 
-    const payload = { guestName, guestCount, attendance, menuChoice, message };
+    const payload = { guestName, attendance, menuChoice, message };
     localStorage.setItem(storageKey, JSON.stringify(payload));
     const submitButton = form.querySelector('button[type="submit"]');
     const action = form.getAttribute("action");
