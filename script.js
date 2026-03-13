@@ -49,7 +49,12 @@ const navLinks = [...document.querySelectorAll(".nav-link")];
 const navSections = navLinks
   .map((link) => document.getElementById(link.dataset.section))
   .filter(Boolean);
-const supportedLanguages = ["de", "el"];
+const supportedLanguages = ["de", "el", "tr"];
+const languageUi = {
+  de: { flag: "🇩🇪", code: "DE", nextKey: "lang_toggle_to_el" },
+  el: { flag: "🇬🇷", code: "GR", nextKey: "lang_toggle_to_tr" },
+  tr: { flag: "🇹🇷", code: "TR", nextKey: "lang_toggle_to_de" },
+};
 const languageStorageKey = "merychris3-lang";
 const translations = {
   de: {
@@ -125,6 +130,7 @@ const translations = {
     music_mute: "Musik stummschalten",
     music_unmute: "Musik aktivieren",
     lang_toggle_to_el: "Sprache wechseln zu Griechisch",
+    lang_toggle_to_tr: "Sprache wechseln zu Türkisch",
     lang_toggle_to_de: "Sprache wechseln zu Deutsch",
     form_target_missing: "Formularziel fehlt. Bitte später erneut versuchen.",
     form_sending: "Rückmeldung wird gesendet...",
@@ -205,11 +211,93 @@ const translations = {
     music_mute: "Σίγαση μουσικής",
     music_unmute: "Ενεργοποίηση μουσικής",
     lang_toggle_to_el: "Αλλαγή γλώσσας στα Ελληνικά",
+    lang_toggle_to_tr: "Αλλαγή γλώσσας στα Τουρκικά",
     lang_toggle_to_de: "Αλλαγή γλώσσας στα Γερμανικά",
     form_target_missing: "Λείπει ο προορισμός της φόρμας. Παρακαλώ δοκιμάστε ξανά αργότερα.",
     form_sending: "Η επιβεβαίωση αποστέλλεται...",
     form_success: "Ευχαριστούμε! Η επιβεβαίωσή σας στάλθηκε με επιτυχία.",
     form_error: "Η αποστολή απέτυχε. Δοκιμάστε ξανά ή επικοινωνήστε μαζί μας τηλεφωνικά.",
+  },
+  tr: {
+    doc_title: "Meryem & Christopher | Dugun",
+    meta_description:
+      "Meryem ve Christopher'in dugun web sitesi. Davet, mekan, gunun akisi ve geri donus ile ilgili tum bilgiler burada.",
+    intro_aria: "Dugun daveti icin giris animasyonu",
+    nav_aria: "Bolumler",
+    nav_location: "Mekan",
+    nav_schedule: "Program",
+    nav_dresscode: "Kiyafet",
+    nav_rsvp: "Katilim",
+    photo_aria: "Meryem ve Christopher'in cift fotografi",
+    photo_alt: "Meryem ve Christopher",
+    photo_fallback: "Gorseli buraya yerlestirin: `merychris3/images/`",
+    hero_getting_married: "Evleniyoruz!",
+    hero_date: "27 Haziran 2026",
+    invitation_p1: "Nihayet vakit geldi, evet diyoruz.",
+    invitation_p2:
+      "Hayatimizin en anlamli gununu bizim icin en degerli insanlarla birlikte gecirmek istiyoruz. Bu nedenle sizi dugunumuzu bizimle birlikte kutlamaya yurekten davet ediyoruz.",
+    invitation_p3:
+      "Duygu dolu, unutulmaz anlarla gecen ve en onemlisi sizlerle birlikte oldugumuz bir gun icin sabirsizlaniyoruz.",
+    invitation_p4: "Haydi birlikte dans edelim, gulelim ve essiz anilar biriktirelim.",
+    countdown_days: "Gun",
+    countdown_hours: "Saat",
+    countdown_minutes: "Dakika",
+    countdown_seconds: "Saniye",
+    location_note: "Schloss Dachau, Munih",
+    location_h2: "Mekan",
+    location_p1: "Nikahimiz ve kutlamamiz guzel Schloss Dachau'da gerceklesecek.",
+    location_p2:
+      "Saat 14:00'te sarayin vestibulunde evet diyecegiz. Gune rahat bir sekilde birlikte baslayabilmemiz icin saat 13:30'da orada olmanizi rica ediyoruz.",
+    location_p3: "Sarayin onunde kullanabileceginiz halka acik bir otopark bulunuyor.",
+    map_title: "Google Maps - Schloss Dachau",
+    open_maps_button: "Google Maps'te ac",
+    schedule_h2: "Gunun akisi",
+    timeline_1: "Misafirlerin gelisi",
+    timeline_2: "Vestibulde nikah toreni",
+    timeline_3: "Terasta veya fuayede atistirmaliklarla karsilama",
+    timeline_4: "Kahve ve pasta",
+    timeline_5: "Bahce salonunda dugun yemegi",
+    timeline_time_after: "ardindan",
+    timeline_6: "DJ ile parti",
+    timeline_7: "Kutlamanin sonu",
+    schedule_hint: "Programdaki degisiklikleri size burada zamaninda bildirecegiz.",
+    dresscode_h2: "Kiyafet",
+    dresscode_p1: "Summer Formal ☀️",
+    rsvp_h2: "Katilim bildirimi",
+    rsvp_p1:
+      "Buradan katilip katilamayacaginizi bize bildirmenizi rica ediyoruz. Ayrica menu seciminizi de burada yapabilirsiniz.",
+    rsvp_hint: "Secenekler: Et (dana), balik (sudak) veya vejetaryen.",
+    form_name_label: "Isim",
+    form_attendance_legend: "Katilim",
+    form_attendance_yes: "Geliyorum",
+    form_attendance_no: "Maalesef gelemiyorum",
+    form_menu_legend: "Menu secimi",
+    form_menu_meat: "Et (dana)",
+    form_menu_fish: "Balik (sudak)",
+    form_menu_veg: "Vejetaryen",
+    form_message_label: "Mesaj (istege bagli)",
+    form_submit_button: "Gonder",
+    form_small_note: "Geri donus tarayicida yerel olarak saklanir ve formumuz uzerinden guvenli sekilde gonderilir.",
+    org_h2: "Organizasyon ekibi",
+    org_p1:
+      "Gunumuzun rahat ve sorunsuz gecmesi icin yanimizda harika bir destek ekibi var. Sorulariniz varsa veya bir surpriz planliyorsaniz sahitlerimizle iletisime gecebilirsiniz.",
+    wishes_h2: "Dilekler",
+    wishes_p1: "Bizim icin en buyuk hediye bu ozel gunu sizlerle birlikte gecirmek.",
+    wishes_p2:
+      "Bunun disinda bize bir mutluluk daha yasatmak isterseniz, evlilige birlikte baslangicimiz icin yapacaginiz katkidan memnun oluruz.",
+    contact_h2: "Iletisim bilgileri",
+    contact_p1: "Dugunle ilgili diger tum sorulariniz icin iletisim bilgilerimizi burada bulabilirsiniz.",
+    contact_photo_alt: "Meryem ve Christopher",
+    footer_p1: "Bu ozel gunu sizinle birlikte gecirmek icin sabirsizlaniyoruz.",
+    music_mute: "Muzigi sessize al",
+    music_unmute: "Muzigi ac",
+    lang_toggle_to_el: "Dili Yunanca yap",
+    lang_toggle_to_tr: "Dili Turkce yap",
+    lang_toggle_to_de: "Dili Almanca yap",
+    form_target_missing: "Form hedefi eksik. Lutfen daha sonra tekrar deneyin.",
+    form_sending: "Geri donus gonderiliyor...",
+    form_success: "Tesekkurler! Geri donusunuz basariyla gonderildi.",
+    form_error: "Gonderim basarisiz oldu. Lutfen tekrar deneyin veya bize dogrudan telefonla ulasin.",
   },
 };
 
@@ -217,6 +305,7 @@ function normalizeLanguage(langCode) {
   if (!langCode) return "de";
   const lower = String(langCode).toLowerCase();
   if (lower.startsWith("el") || lower.startsWith("gr")) return "el";
+  if (lower.startsWith("tr")) return "tr";
   return "de";
 }
 
@@ -260,19 +349,11 @@ function translateElements() {
 
 function syncLanguageToggleUi() {
   if (!languageToggle || !languageFlag || !languageCode) return;
-
-  if (currentLanguage === "el") {
-    languageFlag.textContent = "🇬🇷";
-    languageCode.textContent = "GR";
-    languageToggle.setAttribute("aria-label", t("lang_toggle_to_de"));
-    languageToggle.setAttribute("title", t("lang_toggle_to_de"));
-    return;
-  }
-
-  languageFlag.textContent = "🇩🇪";
-  languageCode.textContent = "DE";
-  languageToggle.setAttribute("aria-label", t("lang_toggle_to_el"));
-  languageToggle.setAttribute("title", t("lang_toggle_to_el"));
+  const currentUi = languageUi[currentLanguage] ?? languageUi.de;
+  languageFlag.textContent = currentUi.flag;
+  languageCode.textContent = currentUi.code;
+  languageToggle.setAttribute("aria-label", t(currentUi.nextKey));
+  languageToggle.setAttribute("title", t(currentUi.nextKey));
 }
 
 function applyLanguage(langCode) {
@@ -392,7 +473,8 @@ if (musicToggle && music) {
 
 if (languageToggle) {
   languageToggle.addEventListener("click", () => {
-    const nextLanguage = currentLanguage === "de" ? "el" : "de";
+    const currentIndex = supportedLanguages.indexOf(currentLanguage);
+    const nextLanguage = supportedLanguages[(currentIndex + 1) % supportedLanguages.length];
     applyLanguage(nextLanguage);
   });
 }
